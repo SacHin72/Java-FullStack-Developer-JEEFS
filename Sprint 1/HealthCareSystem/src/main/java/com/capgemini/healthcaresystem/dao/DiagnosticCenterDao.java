@@ -3,19 +3,12 @@ import java.util.List;
 import com.capgemini.healthcaresystem.dto.*;
 import com.capgemini.healthcaresystem.util.*;						//Importing all packages
 public class DiagnosticCenterDao {
-	TestRepositery tr=new TestRepositery();							//Test repository object
-	DiagnosticCenterRepositery dcr=new DiagnosticCenterRepositery();//Diagnostic center repository object
-	AppointmentRepository ar=new AppointmentRepository();
-	public List<Test> testList()
-	{
-		return tr.returntestObj();
-	}
+
+	DiagnosticCenterRepositery diagnosticCenterRepositery=new DiagnosticCenterRepositery();//Diagnostic center repository object
+
 	public List<DiagnosticCenter> centerList()						//Sending list of Diagnostic center to service Package
 	{
-		return dcr.returnCenterList();
+		return diagnosticCenterRepositery.returnCenterList();
 	}
-	public List<Appointment> AppointmentObjectList()
-	{
-		return ar.returnAppointmentObject();
-	}
+
 }

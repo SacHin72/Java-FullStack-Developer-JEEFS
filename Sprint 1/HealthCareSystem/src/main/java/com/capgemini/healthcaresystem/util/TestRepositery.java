@@ -3,26 +3,17 @@ import java.util.*;
 
 import com.capgemini.healthcaresystem.dto.*;
 public class TestRepositery {
-	public static List<Test> testList=new ArrayList();
+	public static List<DiagnosticTest> testList=new ArrayList();
 	static void testAdd()
 	{
-	testList.add(new Test("101","Fever"));
-	testList.add(new Test("102","Maleria"));
-	testList.add(new Test("103","Corona Virus"));
+	testList.add(new DiagnosticTest("101","Fever"));
+	testList.add(new DiagnosticTest("102","Maleria"));
+	testList.add(new DiagnosticTest("103","Corona Virus"));
 	}
 
-	public List<Test> returntestObj()
+	public List<DiagnosticTest> returntestObj()
 	{
 		testAdd();
 		return testList;
 	}
-//	public static void main(String[] args)
-//	{
-//		TestRepositery tr=new TestRepositery();
-//		for(Test t:tr.returntestObj())
-//		{
-//			System.out.println(t.getTestId());
-//			System.out.println(t.getTestName());
-//		}
-//	}
 }

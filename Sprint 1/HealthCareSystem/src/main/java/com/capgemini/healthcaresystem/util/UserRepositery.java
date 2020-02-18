@@ -7,8 +7,8 @@ public class UserRepositery {
 	void addUser()
 	{
 		userList.add(new User("Sachin kumar","sachin.k.kantiwal@gmail.com","8396825272"));
-		userList.add(new User("Ankit kumar","ankitKumar@gmail.com","8396825272"));
-		userList.add(new User("Rahul kumar","rahuldandotiya@gmail.com","8396825272"));
+		userList.add(new User("Ankit kumar","ankitKumar@gmail.com","9811197175"));
+		userList.add(new User("Rahul kumar","rahuldandotiya@gmail.com","9875213456"));
 	}
 	public List<User> userList()
 	{
