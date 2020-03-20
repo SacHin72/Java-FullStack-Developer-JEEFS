@@ -1,16 +1,18 @@
 package com.capgemini.healthcaresystem.ui;										//importing all packages
 import java.math.BigInteger;
 import java.util.*;
+
+import com.capgemini.healthcaresystem.dao.DiagnosticCenterDao;
 import com.capgemini.healthcaresystem.dto.*;
 import com.capgemini.healthcaresystem.services.*;
-import com.capgemini.healthcaresystem.dao.*;
 import com.capgemini.healthcaresystem.exception.*;
-public class Main {
 
+public class Main {
 	public void mainFunction() throws MyException
 	{
-		CustomerViewAppointment cva=new CustomerViewAppointment();				//Object of View Appointment class
-		AdminApproveAppointment aap=new AdminApproveAppointment();				//Object of Admin approve appointment class
+		CustomerViewAppointment customerViewAppointment=new CustomerViewAppointment();				//Object of View Appointment class
+		AdminApproveAppointment adminApproveAppointment=new AdminApproveAppointment();
+		DiagnosticCenterDao diagnosticCenterDao=new DiagnosticCenterDao();
 		Scanner sc=new Scanner(System.in);
 		
 			System.out.println("Enter 1 for Admin For Approve Appointmnet!");	//print out statements
@@ -24,7 +26,7 @@ public class Main {
 						System.out.println("Enter Appointment id And Y/N");
 						BigInteger bigint=sc.nextBigInteger();
 						char ch=sc2.next().charAt(0);
-						boolean value=aap.approveAppointment(bigint,ch);										//Calling approve appointment function
+						boolean value=adminApproveAppointment.approveAppointment(bigint,ch);										//Calling approve appointment function
 						if(value)
 						{
 							System.out.println("Appointment approved");
@@ -35,12 +37,16 @@ public class Main {
 							System.out.println("Appointment Declined");
 							mainFunction();
 						}
-					}
-				catch(MyException e)
+				}
+				catch(NullPointerException e)
 				{
-					e.getMessage();
+					System.out.println("Null pointer Exception!! Try Again!!");
+					System.out.println();
+					mainFunction();
 				}
 			}
+			
+			
 			else if(choice==2)
 			{
 				try
@@ -48,8 +54,8 @@ public class Main {
 					Scanner sc1=new Scanner(System.in);
 					System.out.println("Enter your Appointmnet Id:");
 					BigInteger b=sc1.nextBigInteger();														
-					Map<BigInteger,Appointment> map=cva.setAppointment();		
-					Appointment appointment=cva.customerViewAppointment(map,b);								//Calling customer view Appointment status function
+					Map<BigInteger,Appointment> map=diagnosticCenterDao.setAppointment();		
+					Appointment appointment=customerViewAppointment.customerViewAppointment(map,b);								//Calling customer view Appointment status function
 					if(appointment!=null)
 					{
 						System.out.println("Appointment id is:"+appointment.getAppointmentId());
@@ -59,7 +65,7 @@ public class Main {
 						System.out.println("Test Id is:"+appointment.getTest().getTestId());
 						System.out.println("Test name is:"+appointment.getTest().getTestName());
 						System.out.println("Date is:"+appointment.getDatetime());
-						if(appointment.isApproved()==true)
+						if(appointment.isApproved())
 							System.out.println("Appointment Status: APPROVED");
 						else
 							System.out.println("Appointment Status: DENIED");
@@ -67,7 +73,6 @@ public class Main {
 					}
 					else
 					{
-						
 						throw new MyException("Id not found Exception");
 					}
 				}
@@ -77,21 +82,29 @@ public class Main {
 					mainFunction();
 				}
 			}
+			
+			
 			else if(choice==3)
 			{ 
 				System.out.println("DONE!!!");
 				return ;
 			}
+			
+			
 			else 
 			{
 				throw new MyException("wrong choice!! Exception");
 			}
 	}
-	
 	public static void main(String[] args) throws MyException {									//Main function
 		Main main=new Main();
+		try {
 		main.mainFunction();
-		
+		}
+		catch(MyException e)
+		{
+			System.out.println(e.getMessage());
+		}
 
 	}
 }
