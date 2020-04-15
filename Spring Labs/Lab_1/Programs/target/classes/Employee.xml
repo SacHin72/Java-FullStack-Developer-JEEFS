@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns = "http://www.springframework.org/schema/beans"
+   xmlns:xsi = "http://www.w3.org/2001/XMLSchema-instance"
+   xsi:schemaLocation = "http://www.springframework.org/schema/beans
+   http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+   <bean id="employee1" class="com.cg.lab.lab1.Employee">
+    	<constructor-arg value="12345"/>
+    	<constructor-arg value="Harriet"></constructor-arg>
+    	<constructor-arg value="40000.0"></constructor-arg>
+    	<constructor-arg value="PES-BU"></constructor-arg>
+    	<constructor-arg value="30"></constructor-arg>
+    	<constructor-arg>  
+			<ref bean="sbu1"/>  
+		</constructor-arg> 
+	</bean>
+	
+	<bean id="sbu1" class="com.cg.lab.lab1.SBU">
+    	<constructor-arg value="100"/>
+    	<constructor-arg value="Product Engineering Services"></constructor-arg>
+    	<constructor-arg value="Kiran Rao"></constructor-arg>
+	</bean>
+	
+	<bean id="employee2" class="com.cg.lab.lab1.Employee">
+		<property name = "employeeId" value ="123456"/>
+		<property name = "employeeName" value ="Name1"/>
+		<property name = "salary" value ="30000"/>
+	</bean>
+	
+	<bean id="sbu2" class="com.cg.lab.lab1.SBU">
+		<property name = "sbuId" value = "100"/>
+    	<property name = "sbuName" value = "Product Engineering Services"/>
+    	<property name = "sbuHead" value = "Kiran Rao"/>
+    	<property name = "empList">
+         <list>
+        	<ref bean="employee2"/>
+         </list>
+      </property>
+	</bean>
+
+</beans>
